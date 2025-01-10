@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary: #3E2723;
+  --primary-light: #4E342E;
+  --primary-dark: #2D1810;
+  --secondary: #D7CCC8;
+  --secondary-light: #EFEBE9;
+  --secondary-dark: #8D6E63;
+  --accent: #795548;
+}
+
 body {
-  @apply bg-secondary-light;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--secondary-light);
+}
+
+/* Additional custom styles */
+.input-focus-ring {
+  @apply focus:ring-2 focus:ring-primary/20 focus:border-primary;
+}
+
+.button-base {
+  @apply transition-all duration-200 ease-in-out;
 }
