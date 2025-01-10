@@ -16,153 +16,127 @@ const LoginPage = () => {
     setTimeout(() => setIsLoading(false), 2000);
   };
 
-  // Animation variants for the circles
-  const circleVariants = {
-    animate: {
-      scale: [1, 1.2, 1],
-      opacity: [0.3, 0.2, 0.3],
-      transition: {
-        duration: 6,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-center items-center p-4">
-      {/* Decorative Circles */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+    <div className="flex h-screen">
+      {/* Left Side - Dark Blue Section */}
+      <div className="w-1/2 bg-[#0A2647] relative overflow-hidden hidden md:block">
+        {/* Animated Circles */}
         <motion.div
-          variants={circleVariants}
-          animate="animate"
-          className="absolute w-96 h-96 rounded-full bg-primary/5"
+          animate={{
+            y: [0, 10, 0],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-[150px] left-[100px] w-[100px] h-[100px] rounded-full bg-[#144272] opacity-60"
         />
+        
         <motion.div
-          variants={circleVariants}
-          animate="animate"
-          transition={{ delay: 0.5 }}
-          className="absolute w-72 h-72 rounded-full bg-primary/10"
-          style={{ top: '12%', left: '12%' }}
+          animate={{
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-[400px] left-[300px] w-[160px] h-[160px] rounded-full bg-[#144272] opacity-40"
         />
-        <motion.div
-          variants={circleVariants}
-          animate="animate"
-          transition={{ delay: 1 }}
-          className="absolute w-48 h-48 rounded-full bg-primary/15"
-          style={{ top: '24%', left: '24%' }}
-        />
+
+        {/* Text */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <motion.h1 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="text-white text-3xl font-bold text-center"
+          >
+            FlashReport
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="text-white/80 text-center mt-2"
+          >
+            Report Corruption. Make Change.
+          </motion.p>
+        </div>
       </div>
 
-      {/* Main Content */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="relative z-10 w-full max-w-md px-8"
-      >
-        {/* Logo Text */}
-        <motion.div 
-          className="text-center mb-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          <h1 className="text-4xl font-bold text-primary mb-2">FlashReport</h1>
-          <p className="text-accent">Report Corruption. Make Change.</p>
-        </motion.div>
-
-        {/* Title */}
-        <motion.h2 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-3xl font-bold text-center text-primary mb-2"
-        >
-          Welcome Back
-        </motion.h2>
-        <motion.p 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="text-accent text-center mb-8"
-        >
-          Sign in to your account
-        </motion.p>
-
-        {/* Form */}
-        <motion.form 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          onSubmit={handleSubmit} 
-          className="space-y-6"
-        >
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-primary mb-2">
-              Email Address
-            </label>
-            <motion.input
-              whileFocus={{ scale: 1.01 }}
-              type="email"
-              id="email"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-4 py-3 rounded-lg border border-secondary 
-                focus:border-primary focus:ring-2 focus:ring-primary/20 
-                transition-all duration-200 bg-white/50 backdrop-blur-sm"
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-primary mb-2">
-              Password
-            </label>
-            <motion.input
-              whileFocus={{ scale: 1.01 }}
-              type="password"
-              id="password"
-              value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              className="w-full px-4 py-3 rounded-lg border border-secondary 
-                focus:border-primary focus:ring-2 focus:ring-primary/20 
-                transition-all duration-200 bg-white/50 backdrop-blur-sm"
-              required
-            />
-          </div>
-
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            type="submit"
-            disabled={isLoading}
-            className={`w-full py-3 rounded-lg text-white font-medium 
-              ${isLoading ? 'bg-primary/70' : 'bg-primary hover:bg-primary-dark'}
-              transition-all duration-200 relative overflow-hidden shadow-lg`}
+      {/* Right Side - Login Form */}
+      <div className="w-full md:w-1/2 bg-white flex items-center justify-center px-8">
+        <div className="w-full max-w-md">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
           >
-            {isLoading ? (
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                className="w-6 h-6 border-2 border-white border-t-transparent rounded-full mx-auto"
-              />
-            ) : (
-              'Sign In'
-            )}
-          </motion.button>
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-gray-900">Welcome Back</h2>
+              <p className="mt-2 text-gray-600">Sign in to your account</p>
+            </div>
 
-          <p className="text-center text-sm text-accent mt-6">
-            Don't have an account?{' '}
-            <Link 
-              to="/signup"
-              className="text-primary font-medium hover:underline"
-            >
-              Sign up
-            </Link>
-          </p>
-        </motion.form>
-      </motion.div>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg bg-[#f0f0f0] border-none focus:ring-2 focus:ring-[#0A2647]/20"
+                  required
+                />
+              </div>
+
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  value={formData.password}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  className="w-full px-4 py-3 rounded-lg bg-[#f0f0f0] border-none focus:ring-2 focus:ring-[#0A2647]/20"
+                  required
+                />
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                className="w-full py-3 px-4 rounded-lg text-white font-medium bg-[#0A2647] hover:bg-[#0A2647]/90 transition-all duration-200"
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    className="w-6 h-6 border-2 border-white border-t-transparent rounded-full mx-auto"
+                  />
+                ) : (
+                  'Sign In'
+                )}
+              </motion.button>
+
+              <p className="text-center text-sm text-gray-600">
+                Don't have an account?{' '}
+                <Link to="/signup" className="text-[#0A2647] font-medium hover:underline">
+                  Sign up
+                </Link>
+              </p>
+            </form>
+          </motion.div>
+        </div>
+      </div>
     </div>
   );
 };
