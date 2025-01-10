@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Coffee } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
@@ -62,22 +61,16 @@ const LoginPage = () => {
         transition={{ duration: 0.8 }}
         className="relative z-10 w-full max-w-md px-8"
       >
-        {/* Logo */}
-        <div className="flex justify-center mb-8">
-          <motion.div
-            animate={{ 
-              y: [0, -10, 0],
-              rotate: [0, -5, 0, 5, 0]
-            }}
-            transition={{ 
-              y: { duration: 2, repeat: Infinity, ease: "easeInOut" },
-              rotate: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-            }}
-            className="bg-primary rounded-full p-4 shadow-lg"
-          >
-            <Coffee size={32} className="text-white" />
-          </motion.div>
-        </div>
+        {/* Logo Text */}
+        <motion.div 
+          className="text-center mb-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          <h1 className="text-4xl font-bold text-primary mb-2">FlashReport</h1>
+          <p className="text-accent">Report Corruption. Make Change.</p>
+        </motion.div>
 
         {/* Title */}
         <motion.h2 
@@ -94,7 +87,7 @@ const LoginPage = () => {
           transition={{ delay: 0.4 }}
           className="text-accent text-center mb-8"
         >
-          Sign in to FlashReport
+          Sign in to your account
         </motion.p>
 
         {/* Form */}
