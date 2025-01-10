@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -8,150 +8,194 @@ const LoginPage = () => {
     password: ''
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    // Check if Tailwind is loaded
-    const isTailwindLoaded = document.documentElement.classList.contains('dark') !== undefined;
-    console.log('Tailwind loaded:', isTailwindLoaded);
-
-    // Check if styles are being applied
-    const testElement = document.createElement('div');
-    testElement.className = 'bg-[#0A2647]';
-    document.body.appendChild(testElement);
-    const computedStyle = window.getComputedStyle(testElement);
-    const isStyleApplied = computedStyle.backgroundColor !== '';
-    console.log('Style applied:', isStyleApplied);
-    console.log('Background color:', computedStyle.backgroundColor);
-    document.body.removeChild(testElement);
-
-    // Check imports
-    try {
-      if (!motion) {
-        console.error('Framer Motion not loaded');
-        setError('Animation library not loaded');
-      }
-    } catch (e) {
-      console.error('Error loading dependencies:', e);
-      setError('Required dependencies not loaded');
-    }
-
-    // Log current environment
-    console.log('Current environment:', {
-      isDevelopment: process.env.NODE_ENV === 'development',
-      publicPath: process.env.PUBLIC_URL,
-      baseUrl: window.location.origin
-    });
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setError(null);
-
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log('Form submitted with:', formData);
-    } catch (err) {
-      console.error('Error during submission:', err);
-      setError('Failed to submit form');
-    } finally {
-      setIsLoading(false);
-    }
+    setTimeout(() => setIsLoading(false), 2000);
   };
 
   return (
-    <div className="flex h-screen" style={{ border: '2px solid red' }}>
-      {/* Added border to check if component is rendering */}
-      
-      {/* Debug Information */}
-      <div className="fixed top-0 left-0 bg-white p-4 z-50 text-xs">
-        <p>Window Size: {window.innerWidth} x {window.innerHeight}</p>
-        <p>Classes Applied: {document.body.classList.toString()}</p>
-        {error && <p className="text-red-500">Error: {error}</p>}
-      </div>
-
-      {/* Left Side - Dark Blue Section */}
-      <div className="w-1/2 relative overflow-hidden hidden md:block" style={{ backgroundColor: '#0A2647' }}>
-        {/* Using inline styles as fallback */}
-        <div className="absolute top-4 left-4 text-white">
-          <p>Left side rendered</p>
-        </div>
-        
-        {/* Animated Circles */}
+    <div style={{ display: 'flex', height: '100vh', width: '100vw', margin: 0, padding: 0 }}>
+      {/* Left Side */}
+      <div style={{ 
+        width: '50%', 
+        backgroundColor: '#0A2647',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* Animated Circle 1 */}
         <motion.div
           animate={{
-            y: [0, 10, 0],
+            y: [0, 10, 0]
           }}
           transition={{
             duration: 3,
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute top-[150px] left-[100px] w-[100px] h-[100px] rounded-full"
-          style={{ backgroundColor: '#144272', opacity: 0.6 }}
+          style={{
+            position: 'absolute',
+            top: '150px',
+            left: '100px',
+            width: '100px',
+            height: '100px',
+            borderRadius: '50%',
+            backgroundColor: '#144272',
+            opacity: 0.6
+          }}
         />
-        
+
+        {/* Animated Circle 2 */}
         <motion.div
           animate={{
-            scale: [1, 1.1, 1],
+            scale: [1, 1.1, 1]
           }}
           transition={{
             duration: 4,
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute top-[400px] left-[300px] w-[160px] h-[160px] rounded-full"
-          style={{ backgroundColor: '#144272', opacity: 0.4 }}
+          style={{
+            position: 'absolute',
+            top: '400px',
+            left: '300px',
+            width: '160px',
+            height: '160px',
+            borderRadius: '50%',
+            backgroundColor: '#144272',
+            opacity: 0.4
+          }}
         />
 
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <h1 className="text-white text-3xl font-bold text-center">FlashReport</h1>
-          <p className="text-white/80 text-center mt-2">Report Corruption. Make Change.</p>
+        {/* Text Content */}
+        <div style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          textAlign: 'center',
+          color: 'white'
+        }}>
+          <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+            FlashReport
+          </h1>
+          <p style={{ fontSize: '1.1rem', opacity: 0.8 }}>
+            Report Corruption. Make Change.
+          </p>
         </div>
       </div>
 
       {/* Right Side - Login Form */}
-      <div className="w-full md:w-1/2 bg-white flex items-center justify-center px-8">
-        <div className="w-full max-w-md">
-          <form onSubmit={handleSubmit} className="space-y-6">
+      <div style={{
+        width: '50%',
+        backgroundColor: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem'
+      }}>
+        <div style={{ width: '100%', maxWidth: '400px' }}>
+          <h2 style={{ 
+            textAlign: 'center', 
+            fontSize: '1.5rem', 
+            fontWeight: 'bold',
+            marginBottom: '2rem',
+            color: '#0A2647'
+          }}>
+            Welcome Back
+          </h2>
+
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label style={{ 
+                display: 'block', 
+                marginBottom: '0.5rem', 
+                fontSize: '0.875rem',
+                color: '#4B5563'
+              }}>
                 Email
               </label>
               <input
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg"
-                style={{ backgroundColor: '#f0f0f0' }}
+                style={{
+                  width: '100%',
+                  padding: '0.75rem 1rem',
+                  borderRadius: '0.5rem',
+                  backgroundColor: '#f0f0f0',
+                  border: 'none',
+                  outline: 'none'
+                }}
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label style={{ 
+                display: 'block', 
+                marginBottom: '0.5rem', 
+                fontSize: '0.875rem',
+                color: '#4B5563'
+              }}>
                 Password
               </label>
               <input
                 type="password"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="w-full px-4 py-3 rounded-lg"
-                style={{ backgroundColor: '#f0f0f0' }}
+                style={{
+                  width: '100%',
+                  padding: '0.75rem 1rem',
+                  borderRadius: '0.5rem',
+                  backgroundColor: '#f0f0f0',
+                  border: 'none',
+                  outline: 'none'
+                }}
                 required
               />
             </div>
 
-            <button
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               type="submit"
-              className="w-full py-3 px-4 rounded-lg text-white font-medium"
-              style={{ backgroundColor: '#0A2647' }}
               disabled={isLoading}
+              style={{
+                width: '100%',
+                padding: '0.75rem 1rem',
+                borderRadius: '0.5rem',
+                backgroundColor: '#0A2647',
+                color: 'white',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '1rem',
+                fontWeight: '500'
+              }}
             >
-              {isLoading ? 'Loading...' : 'Sign In'}
-            </button>
+              {isLoading ? (
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  style={{
+                    width: '1.5rem',
+                    height: '1.5rem',
+                    border: '2px solid white',
+                    borderTopColor: 'transparent',
+                    borderRadius: '50%',
+                    margin: '0 auto'
+                  }}
+                />
+              ) : 'Sign In'}
+            </motion.button>
+
+            <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#4B5563' }}>
+              Don't have an account?{' '}
+              <Link to="/signup" style={{ color: '#0A2647', fontWeight: '500', textDecoration: 'none' }}>
+                Sign up
+              </Link>
+            </p>
           </form>
         </div>
       </div>
