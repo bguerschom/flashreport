@@ -14,14 +14,20 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: var(--secondary-light);
+  @apply bg-white;
 }
 
-/* Additional custom styles */
-.input-focus-ring {
-  @apply focus:ring-2 focus:ring-primary/20 focus:border-primary;
+/* Custom focus styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary;
 }
 
-.button-base {
-  @apply transition-all duration-200 ease-in-out;
+/* Custom button styles */
+.btn-primary {
+  @apply bg-primary hover:bg-primary-dark text-white transition-all duration-200;
+}
+
+/* Custom input styles */
+.input-minimal {
+  @apply border-secondary focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200;
 }
